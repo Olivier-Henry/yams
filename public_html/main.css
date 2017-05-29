@@ -1,0 +1,101 @@
+html, body{
+    height: 100%;
+}
+
+.heigt-100{
+    height:100%;
+}
+.tapis{
+    background-image: url('texture pelouse.jpg');
+    position: relative;
+
+}
+#lance{
+    position: absolute;
+    top:calc(50% - 17px);
+    left:calc(50% - 37px);
+}
+
+#ausuivant{
+    position: absolute;
+    bottom:6px;
+    right:6px;
+}
+.h75{
+    height: 75px;
+    width: auto;
+}
+.tour{
+    position: relative;
+
+}
+
+.nbtour{
+    position: absolute;
+    height:100px;
+    bottom: 20px;
+    margin:0 6px 3px -7px;
+    text-align: center;
+    border:3px solid orange;
+    border-radius: 5px;
+
+
+}
+.sommeDes{
+    position: absolute;
+    height:100px;
+    bottom: 140px;
+    margin:0 6px 3px -7px;
+    text-align: center;
+    border:3px solid orange;
+    border-radius: 5px;
+
+
+}
+.nbtour h3, .sommeDes h3 {
+    color:white;
+    font-size:12px;
+    background-color: orange;
+    margin:0;
+    padding:0;
+}
+
+.nbtour p, .sommeDes p {
+    color:orange;
+    font-size:36px;
+    margin-top:7px;
+}
+td {
+   text-align: center;
+   border-color:black!important;
+}
+
+.cases{
+    background-color: #e4bb4c;
+    text-align:center;
+}
+
+.bordertop{
+   border-top:3px solid black;
+   background-color:darkgrey;
+   }
+
+.borderbottom{
+    border-bottom: 3px solid black;
+    background-color:darkgrey;
+}
+.column15{
+    width:15%;
+}
+
+.column25{
+    width:25%;
+}
+
+.caseImpossible{
+    background-color: lightgrey;
+}
+
+img{
+    border-radius: 14px;
+}
