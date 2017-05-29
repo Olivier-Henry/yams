@@ -67,7 +67,7 @@ app.controller('jeu', function ($scope) {
         }
 
         if ($scope.annonce) {
-            switch ($scope.annonce){
+            switch ($scope.annonce) {
                 case 14:
                     $scope.remplirChance('annonce', $scope.annonce);
                     break;
@@ -150,12 +150,12 @@ app.controller('jeu', function ($scope) {
                 r = !($scope.columns[context][$scope.order[position]] !== null);
                 break;
             case 'montee':
-                
+
                 var disorder = Object.assign([], $scope.order);
                 disorder.reverse();
                 r = !($scope.columns[context][disorder[position]] !== null);
-                
-                if(+position === 15){
+
+                if (+position === 15) {
                     r = false;
                 }
                 break;
@@ -168,40 +168,19 @@ app.controller('jeu', function ($scope) {
     };
 
     $scope.remplirChance = function (context, position) {
-        if ($scope.caseImpossible(context, position))
-            return false;
-        
-        if(!$scope.canClick()){
-            return false;
-        }
 
-        if (context !== 'annonce' && $scope.annonce) {
+        if (!$scope.isAutorized(context, position)) {
             return false;
-        }
-
-        if (context === 'annonce' && $scope.tour === 1) {
-            $scope.annonce = position;
         }
 
         $scope.columns[context][$scope.order[position]] = $scope.sommeDes();
     };
 
     $scope.remplirYams = function (context, position) {
-               
 
-        if ($scope.caseImpossible(context, position))
-            return false;
-        
-        if(!$scope.canClick()){
-            return false;
-        }
 
-        if (context !== 'annonce' && $scope.annonce) {
+        if (!$scope.isAutorized(context, position)) {
             return false;
-        }
-
-        if (context === 'annonce' && $scope.tour === 1) {
-            $scope.annonce = position;
         }
 
         var arr = $scope.tirage.concat($scope.deChoisis);
@@ -216,67 +195,57 @@ app.controller('jeu', function ($scope) {
 
         $scope.columns[context][$scope.order[position]] = result * 50;
     };
-    
-    $scope.canClick = function(){
-      return $scope.tour > 0;  
+
+    $scope.canClick = function () {
+        return $scope.tour > 0;
     };
 
-    $scope.remplirMaxi = function (context, position){
-       
-        if ($scope.caseImpossible(context, position))
-            return false;
-        
-        if(!$scope.canClick()){
+    $scope.remplirMaxi = function (context, position) {
+
+        if (!$scope.isAutorized(context, position)) {
             return false;
         }
 
-        if (context !== 'annonce' && $scope.annonce) {
-            return false;
-        }
-
-        if (context === 'annonce' && $scope.tour === 1) {
-            $scope.annonce = position;
-        }
-        
         var mini = $scope.columns[context][$scope.order[12]];
-            
-            if (mini > $scope.sommeDes())
-                return false ;
-         
+
+        if (mini > $scope.sommeDes())
+            return false;
+
         $scope.columns[context][$scope.order[position]] = $scope.sommeDes();
-        
+
     };
-     $scope.remplirMini = function (context, position){
-       
-        if ($scope.caseImpossible(context, position))
-            return false;
-        
-        if(!$scope.canClick()){
+    $scope.remplirMini = function (context, position) {
+
+        if (!$scope.isAutorized(context, position)) {
             return false;
         }
 
-        if (context !== 'annonce' && $scope.annonce) {
-            return false;
-        }
-
-        if (context === 'annonce' && $scope.tour === 1) {
-            $scope.annonce = position;
-        }
-        
         var maxi = $scope.columns[context][$scope.order[11]];
-            
-            if (maxi < $scope.sommeDes()&& maxi !== null)
-                return false ;
-         
+
+        if (maxi < $scope.sommeDes() && maxi !== null)
+            return false;
+
         $scope.columns[context][$scope.order[position]] = $scope.sommeDes();
-        
+
     };
-        $scope.remplirOnze = function(context,position){
-         
+    $scope.remplirOnze = function (context, position) {
+
+        if (!$scope.isAutorized(context, position)) {
+            return false;
+        }
+
+        if ($scope.sommeDes() > 10)
+            return false;
+
+        $scope.columns[context][$scope.order[position]] = $scope.sommeDes();
+
+    };
+
+    $scope.isAutorized = function (context, position) {
         if ($scope.caseImpossible(context, position))
             return false;
-        
-        if(!$scope.canClick()){
+
+        if (!$scope.canClick()) {
             return false;
         }
 
@@ -287,12 +256,8 @@ app.controller('jeu', function ($scope) {
         if (context === 'annonce' && $scope.tour === 1) {
             $scope.annonce = position;
         }
-        
-            if ($scope.sommeDes() > 10)
-                return false ;
-         
-        $scope.columns[context][$scope.order[position]] = $scope.sommeDes();
-        
-    };   
-      
+
+        return true;
+    };
+
 });
